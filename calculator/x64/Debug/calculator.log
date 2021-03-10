@@ -1,0 +1,19 @@
+﻿  calculator.cpp
+D:\Projects\calculator\calculator.cpp(151,17): warning C4244: инициализация: преобразование "_Ty" в "int", возможна потеря данных
+          with
+          [
+              _Ty=__int64
+          ]
+D:\Projects\calculator\calculator.cpp(153,16): warning C4244: инициализация: преобразование "_Ty" в "int", возможна потеря данных
+          with
+          [
+              _Ty=__int64
+          ]
+D:\Projects\calculator\calculator.cpp(173,19): warning C4244: аргумент: преобразование "double" в "__int64", возможна потеря данных
+D:\Projects\calculator\calculator.cpp(177,18): warning C4244: return: преобразование "_Ty" в "int", возможна потеря данных
+          with
+          [
+              _Ty=__int64
+          ]
+D:\Projects\calculator\calculator.cpp(185,31): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
+  calculator.vcxproj -> D:\Projects\calculator\x64\Debug\calculator.exe

@@ -1,0 +1,4 @@
+﻿D:\Новая папка\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (ConsoleApplication1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  Class_Vector.cpp
+C:\Users\санчелло\Desktop\Vector-20201126T084431Z-001\Vector\vector.h(124): warning C4715: Vector::findValue: значение возвращается не при всех путях выполнения
+  Class_Vector.vcxproj -> C:\Users\санчелло\Desktop\Vector-20201126T084431Z-001\Vector\Debug\Class_Vector.exe

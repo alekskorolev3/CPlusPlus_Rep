@@ -1,0 +1,4 @@
+D:\Programs\Visual Studio Projects\ConsoleApplication1\Debug\ConsoleApplication1.exe
+D:\Programs\Visual Studio Projects\ConsoleApplication1\Debug\ConsoleApplication1.pdb
+C:\Users\санчелло\Desktop\Vector-20201126T084431Z-001\Vector\Debug\ConsoleApplication1.exe
+C:\Users\санчелло\Desktop\Vector-20201126T084431Z-001\Vector\Debug\ConsoleApplication1.pdb

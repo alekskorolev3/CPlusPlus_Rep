@@ -1,0 +1,2 @@
+D:\Projects\Minimum_in_List\Debug\Minimum_in_List.exe
+D:\Projects\Minimum_in_List\Debug\Minimum_in_List.pdb

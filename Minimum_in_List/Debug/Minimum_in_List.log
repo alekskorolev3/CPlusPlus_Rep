@@ -1,0 +1,3 @@
+﻿  Minimum_in_List.cpp
+D:\Projects\Minimum_in_List\Minimum_in_List.cpp(74): warning C4715: init: значение возвращается не при всех путях выполнения
+  Minimum_in_List.vcxproj -> D:\Projects\Minimum_in_List\Debug\Minimum_in_List.exe

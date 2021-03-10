@@ -1,0 +1,2 @@
+D:\Projects\Быки_и_коровы\Debug\Быки_и_коровы.exe
+D:\Projects\Быки_и_коровы\Debug\Быки_и_коровы.pdb

@@ -1,0 +1,2 @@
+D:\Projects\University\x64\Debug\University.exe
+D:\Projects\University\x64\Debug\University.pdb

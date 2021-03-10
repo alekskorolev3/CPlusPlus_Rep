@@ -1,0 +1,2 @@
+D:\Projects\calculator\x64\Debug\calculator.exe
+D:\Projects\calculator\x64\Debug\calculator.pdb
