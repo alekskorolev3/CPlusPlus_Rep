@@ -132,10 +132,10 @@ public:
     }
     void PrintElement(int index)
     {
-        int chunk_index = (start + index) % capacity*4;
-        int buff = chunk_index / 4;
-        int i = chunk_index % 4;
-        Block<T>* temp = adress[buff];
+        int buff = (start + index) % (capacity*4);
+        int chunk_index = buff / 4;
+        int i = buff % 4;
+        Block<T>* temp = adress[chunk_index];
         cout << temp->chunk[i]<< endl;
         /*for (int i = 0; i < adress.size(); i++)
         {
