@@ -1,0 +1,4 @@
+D:\Projects\C++\CPlusPlus_Rep\deque_1\Debug\deque_1.exe
+D:\Projects\C++\CPlusPlus_Rep\deque_1\Debug\deque_1.pdb
+D:\Projects\C++\CPlusPlus_Rep\deque\Debug\deque_1.exe
+D:\Projects\C++\CPlusPlus_Rep\deque\Debug\deque_1.pdb
