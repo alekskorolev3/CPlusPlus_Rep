@@ -1,2 +1,0 @@
-D:\Projects\two sums\Debug\two sums.exe
-D:\Projects\two sums\Debug\two sums.pdb

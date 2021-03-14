@@ -1,4 +1,24 @@
 deque/.vs/
 deque/Debug/
-deque/new.txt
-Vector/Debug
+deque/deque_1.sln
+deque/deque_1.vcxproj
+deque/deque_1.vcxproj.filters
+deque/deque_1.vcxproj.user
+Vector/
+calculator/.vs/
+calculator/x64/
+calculator/calculator.sln
+calculator/calculator.vcxproj
+calculator/calculator.vcxproj.filters
+calculator/calculator.vcxproj.user
+Minimum_in_List/
+Minimum_in_List/
+University/.vs/
+University/x64/
+University/University.sln
+University/University.vcxproj
+University/University.vcxproj.filters
+University/University.vcxproj.user
+Быки_и_коровы/
+Быки_и_коровы/
+two sums/
