@@ -1,12 +1,16 @@
 ﻿#include <iostream>
 #include <vector>
-#include <iterator>
+
 using namespace std;
+
+
 template <class T>
 class Block
 {
-public:
+protected:
     T *chunk;
+    
+public:
     Block()
     {
         chunk = new T[4];
@@ -22,8 +26,11 @@ template <class T>
 class deque : public Block<T>
 {
 public:
-    deque();
 
+    vector <Block<T>*> adress;
+    int start;
+    int end;
+    deque();
     bool IsOneChunk(bool direction);
     void push_back(T data);
     void push_front(T data);
@@ -33,21 +40,49 @@ public:
     void clear();
     bool empty();
     int size();
-
+    
     T& operator [] (const int index)
     {
         int buff = (start + index) % (capacity * 4);
         int chunk_index = buff / 4;
         int i = buff % 4;
         Block<T>* temp = adress[chunk_index];
-        return temp->chunk[i];
+        return temp->GetChunk()[i];
     }
-private:
-    vector <Block<T>*> adress;
+   
+    class Iterator
+    {
+    private:
+        Block<T>* node;
+        int index;
+    public:
+        Iterator()
+        {
+            node = nullptr;
+            index = 0;
+        }
+        Iterator(int start, vector<Block<T>*> adress)
+        {
+            int chunk_index = start / 4;
+            index = start % 4;
+            node = adress[chunk_index];
+        }
+
+        T& operator *()
+        {
+            return node->GetChunk()[index];
+        }
+
+    };
+    Iterator begin()
+    {
+        return Iterator(start, adress);
+    }
+protected:
+    
     int Size;
     int capacity;
-    int start;
-    int end;
+    
 };
 
 template <class T>
@@ -154,7 +189,7 @@ void deque<T>::push_front(T data)
     int chunk_index = start / 4;
     int i = start % 4;
     Block<T>* temp = adress[chunk_index];
-    temp->chunk[i] = data;
+    temp->GetChunk()[i] = data;
     Size++;
 }
 
@@ -172,7 +207,7 @@ void deque<T>::push_back(T data)
     int i = 0;
     i = end % 4;
     Block<T>* temp = adress[buff];
-    temp->chunk[i] = data;
+    temp->GetChunk()[i] = data;
     end += 1;
     end %= adress.size() * 4;
     Size++;
@@ -209,14 +244,19 @@ bool deque<T>::IsOneChunk(bool direction)
 
 }
 
+
+
+
 int main()
 {
     deque <int> d;
+    deque <int> ::Iterator it;
+    
     d.push_front(100);
     d.push_back(10);
     d.push_front(200);
     d.push_back(20);
-    d.push_front(300);
+    /*d.push_front(300);
     d.push_front(400);
     d.push_front(500);
     d.push_front(600);
@@ -229,6 +269,8 @@ int main()
     for (int i = 0; i < d.size(); i++)
     {
         cout << d[i] << endl;
-    }
+    }*/
+    it = d.begin();
+    cout << *it << endl;
 }
 
