@@ -1,2 +1,6 @@
 ﻿  deque_1.cpp
+D:\Projects\C++\CPlusPlus_Rep\deque\deque_1.cpp(180,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Projects\C++\CPlusPlus_Rep\deque\deque_1.cpp(179): message : во время компиляции функции-члена класс шаблон "void deque<int>::clear(void)"
+D:\Projects\C++\CPlusPlus_Rep\deque\deque_1.cpp(324): message : выполняется компиляция ссылки на экземпляр шаблон функции "void deque<int>::clear(void)"
+D:\Projects\C++\CPlusPlus_Rep\deque\deque_1.cpp(314): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "deque<int>"
   deque_1.vcxproj -> D:\Projects\C++\CPlusPlus_Rep\deque\Debug\deque_1.exe

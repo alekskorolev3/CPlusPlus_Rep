@@ -1,15 +1,13 @@
 ﻿#include <iostream>
 #include <vector>
-
 using namespace std;
-
 
 template <class T>
 class Block
 {
 protected:
-    T *chunk;
-    
+    T* chunk;
+
 public:
     Block()
     {
@@ -26,10 +24,6 @@ template <class T>
 class deque : public Block<T>
 {
 public:
-
-    vector <Block<T>*> adress;
-    int start;
-    int end;
     deque();
     bool IsOneChunk(bool direction);
     void push_back(T data);
@@ -40,8 +34,8 @@ public:
     void clear();
     bool empty();
     int size();
-    
-    
+
+
     T& operator [] (const int index)
     {
         int buff = (start + index) % (capacity * 4);
@@ -50,7 +44,7 @@ public:
         Block<T>* temp = adress[chunk_index];
         return temp->GetChunk()[i];
     }
-   
+
     class Iterator
     {
     private:
@@ -68,7 +62,7 @@ public:
             s = 0;
             e = 0;
         }
-        Iterator(deque<T> *d, bool flag)
+        Iterator(deque<T>* d, bool flag)
         {
             pointer = d;
             s = pointer->start;
@@ -126,8 +120,8 @@ public:
             node = pointer->adress[chunk_index];
             return *this;
         }
-
     };
+   
     Iterator Begin()
     {
         bool flag = true;
@@ -141,10 +135,13 @@ public:
         return b;
     }
 protected:
-    
+
     int Size;
     int capacity;
-    
+    vector <Block<T>*> adress;
+    int start;
+    int end;
+
 };
 
 template <class T>
@@ -182,12 +179,18 @@ void deque<T>::clear()
 {
     for (int i = 0; i < adress.size(); i++)
     {
-        Block<T>* temp = adress[i];
-        delete temp;
-        adress[i] = nullptr;
-        adress.clear();
+        delete adress[i];
     }
-    deque();
+    adress.clear();
+    capacity = 2;
+    for (int i = 0; i < capacity; i++)
+    {
+        Block<T>* b = new Block<T>();
+        adress.push_back(b);
+    }
+    start = 0;
+    end = 0;
+    Size = 0;
 }
 
 template <class T>
@@ -306,9 +309,6 @@ bool deque<T>::IsOneChunk(bool direction)
 
 }
 
-
-
-
 int main()
 {
     deque <int> d;
@@ -321,15 +321,22 @@ int main()
     d.push_front(300);
     d.push_front(400);
     d.push_front(500);
+    d.clear();
     d.push_front(600);
     d.push_front(700);
     d.push_back(30);
     d.push_back(40);
     d.push_back(50);
-    d.pop_back();
-    d.pop_front();
+    d.push_front(1);
     it = d.Begin();
-    cout << *(it + 3) << endl;
+    ++it;
+    it + 2;
+    --it;
+    cout << *it << endl;
+    for (int i = 0; i < d.size(); i++)
+    {
+        cout << d[i] << endl;
+    }
     
     
 }
