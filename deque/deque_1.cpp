@@ -41,6 +41,7 @@ public:
     bool empty();
     int size();
     
+    
     T& operator [] (const int index)
     {
         int buff = (start + index) % (capacity * 4);
@@ -54,29 +55,90 @@ public:
     {
     private:
         Block<T>* node;
+        deque<T>* pointer;
         int index;
+        int s;
+        int e;
     public:
         Iterator()
         {
             node = nullptr;
+            pointer = nullptr;
             index = 0;
+            s = 0;
+            e = 0;
         }
-        Iterator(int start, vector<Block<T>*> adress)
+        Iterator(deque<T> *d, bool flag)
         {
-            int chunk_index = start / 4;
-            index = start % 4;
-            node = adress[chunk_index];
+            pointer = d;
+            s = pointer->start;
+            e = pointer->end;
+            if (flag)
+            {
+                int chunk_index = s / 4;
+                index = s % 4;
+                node = pointer->adress[chunk_index];
+            }
+            else
+            {
+                int chunk_index = e / 4;
+                index = e % 4;
+                node = pointer->adress[chunk_index];
+            }
         }
-
         T& operator *()
         {
             return node->GetChunk()[index];
         }
+        Iterator operator ++()
+        {
+            s += pointer->capacity * 4 + 1;
+            s %= pointer->capacity * 4;
+            int chunk_index = s / 4;
+            index = s % 4;
+            node = pointer->adress[chunk_index];
+            return *this;
+        }
+        Iterator operator --()
+        {
+            s += pointer->capacity * 4 - 1;
+            s %= pointer->capacity * 4;
+            int chunk_index = s / 4;
+            index = s % 4;
+            node = pointer->adress[chunk_index];
+            return *this;
+        }
+        Iterator operator +(int index)
+        {
+            s += pointer->capacity * 4 + index;
+            s %= pointer->capacity * 4;
+            int chunk_index = s / 4;
+            index = s % 4;
+            node = pointer->adress[chunk_index];
+            return *this;
+        }
+        Iterator operator -(int index)
+        {
+            s += pointer->capacity * 4 - index;
+            s %= pointer->capacity * 4;
+            int chunk_index = s / 4;
+            index = s % 4;
+            node = pointer->adress[chunk_index];
+            return *this;
+        }
 
     };
-    Iterator begin()
+    Iterator Begin()
     {
-        return Iterator(start, adress);
+        bool flag = true;
+        Iterator buff(this, flag);
+        return buff;
+    }
+    Iterator End()
+    {
+        bool flag = false;
+        Iterator b(this, flag);
+        return b;
     }
 protected:
     
@@ -256,7 +318,7 @@ int main()
     d.push_back(10);
     d.push_front(200);
     d.push_back(20);
-    /*d.push_front(300);
+    d.push_front(300);
     d.push_front(400);
     d.push_front(500);
     d.push_front(600);
@@ -266,11 +328,9 @@ int main()
     d.push_back(50);
     d.pop_back();
     d.pop_front();
-    for (int i = 0; i < d.size(); i++)
-    {
-        cout << d[i] << endl;
-    }*/
-    it = d.begin();
-    cout << *it << endl;
+    it = d.Begin();
+    cout << *(it + 3) << endl;
+    
+    
 }
 
