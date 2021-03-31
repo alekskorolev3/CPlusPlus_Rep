@@ -10,19 +10,83 @@ private:
 		pair<T1, T2> data;
 		Node* left;
 		Node* right;
+		Node* parent;
 	};
+	
 	Node* tnode;
 	Node* thead;
 	int _size;
+
+	Node* min(Node* cur)
+	{
+		if (cur->left == nullptr)
+		{
+			return cur;
+		}
+		return min(cur->left);
+	}
+
+	Node* max(Node* cur)
+	{
+		if (cur->right == nullptr)
+		{
+			return cur;
+		}
+		return max(cur->right);
+	}
+
+
 public:
-	int _index;
+
+
+	class Iterator
+	{
+	private:
+		Map<T1, T2>* mp;
+		Node* tnode;
+	public:
+		Iterator()
+		{
+
+			tnode = nullptr;
+		}
+		Iterator(Map<T1, T2>* map)
+		{
+			mp = map;
+			tnode = mp->min(mp->getHead());
+		}
+
+		
+
+		Iterator& operator =(Node* cur)
+		{
+			tnode = cur;
+			return *this;
+		}
+		Iterator& operator ++()
+		{
+			tnode = mp->next(tnode->data.first);
+			return *this;
+		}
+		Node* operator *()
+		{
+			return tnode;
+		}
+	};
+
+	Iterator Begin()
+	{
+		Iterator buff(this);
+		return buff;
+	}
+
 	Map()
 	{
+		
 		tnode = nullptr;
 		thead = nullptr;
-		_size = 0;
-		_index = 0;
 	}
+
 	Node* getHead()
 	{
 		return thead;
@@ -38,19 +102,21 @@ public:
 			tnode->data.second = value;
 			tnode->left = nullptr;
 			tnode->right = nullptr;
+			tnode->parent = nullptr;
 		}
 		else
 		{
 			Node* cur = thead;
 			while (true)
 			{
-				
+
 				if (key < cur->data.first)
 				{
 					if (cur->left == nullptr)
 					{
-						
+
 						cur->left = new Node;
+						cur->left->parent = cur;
 						cur = cur->left;
 						cur->left = nullptr;
 						cur->right = nullptr;
@@ -65,6 +131,7 @@ public:
 					if (cur->right == nullptr)
 					{
 						cur->right = new Node;
+						cur->right->parent = cur;
 						cur = cur->right;
 						cur->left = nullptr;
 						cur->right = nullptr;
@@ -78,9 +145,15 @@ public:
 		}
 	}
 
+	T2& operator [](T1 key)
+	{
+		Node* temp = this->find(thead, key);
+		return temp->data.second;
+	}
+
 	void print(Node* cur)
 	{
-		
+
 		if (cur != nullptr)
 		{
 			print(cur->left);
@@ -93,6 +166,7 @@ public:
 	{
 		return _size;
 	}
+
 	bool empty()
 	{
 		if (thead == nullptr)
@@ -101,6 +175,7 @@ public:
 		}
 		return false;
 	}
+
 	Node* find(Node* cur, T1 key)
 	{
 		if (key == cur->data.first || cur == nullptr)
@@ -117,20 +192,103 @@ public:
 		}
 	}
 
+	Node* next(T1 key)
+	{
+		Node* cur = thead;
+		Node* suc = nullptr;
+		while (cur != nullptr)
+		{
+			if (key < cur->data.first)
+			{
+				suc = cur;
+				cur = cur->left;
+			}
+			else
+			{
+				cur = cur->right;
+			}
+		}
+		return suc;
+	}
+
+	Node* prev(T1 key)
+
+	{
+		Node* cur = thead;
+		Node* suc = nullptr;
+		while (cur != nullptr)
+		{
+			if (key > cur->data.first)
+			{
+				suc = cur;
+				cur = cur->right;
+			}
+			else
+			{
+				cur = cur->left;
+			}
+		}
+		return suc;
+	}
+
+	Node* erase (Node* cur, T1 key)
+	{
+		if (cur == nullptr)
+		{
+			return cur;
+		}
+		if (key < cur->data.first)
+		{
+			cur->left = erase(cur->left, key);
+		}
+		else if (key > cur->data.first)
+		{
+			cur->right = erase(cur->right, key);
+		}
+		else if (cur->left != nullptr && cur->right != nullptr)
+		{
+			cur->data.first = min(cur->right)->data.first;
+			cur->right = erase(cur->right, cur->data.first);
+		}
+		else
+		{
+			if (cur->left != nullptr)
+			{
+				cur = cur->left;
+			}
+			else if (cur->right != nullptr)
+			{
+				cur = cur->right;
+			}
+			else
+			{
+				cur = nullptr;
+			}
+		}
+		return cur;
+	}
+
+	
 };
+
 
 int main()
 {
 	Map<int, char> map;
+	Map<int, char> :: Iterator It;
 	map.add(10, 'a');
 	map.add(5, 'b');
 	map.add(20, 'c');
 	map.add(1, 'd');
 	map.add(8, 'e');
 	map.add(40, 'f');
-	map.print(map.getHead());
-	auto it = map.find(map.getHead(), 8);
-	cout << it->data.first << " " << it->data.second;
-	return 0;
-
+	auto head = map.getHead();
+	map.print(head);
+	map.erase(head, 5);
+	It = map.Begin();
+	++It;
+	++It;
+	++It;	
+	cout << (*It)->data.first << endl;
+	cout << map[8];
 }
