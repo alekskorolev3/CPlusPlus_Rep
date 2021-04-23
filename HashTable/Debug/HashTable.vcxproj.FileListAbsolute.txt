@@ -1,0 +1,2 @@
+D:\Projects\C++\CPlusPlus_Rep\HashTable\Debug\HashTable.exe
+D:\Projects\C++\CPlusPlus_Rep\HashTable\Debug\HashTable.pdb
